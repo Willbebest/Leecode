@@ -31,3 +31,23 @@ public:
         return root;
     }
 };
+
+class Solution1 {
+public:
+    Node* connect(Node* root) {
+        if(root==nullptr) return root;
+        queue<Node*> queNode;
+        queNode.push(root);
+        while(queNode.size()) {
+            size_t size = queNode.size();
+            for(size_t i = 0; i<size; i++) {
+                Node* node = queNode.front(); queNode.pop();
+                if(i<size-1) node->next = queNode.front();  // 注意 size
+                if(node->left) queNode.push(node->left);
+                if(node->right) queNode.push(node->right); 
+            }
+        }
+
+        return root;
+    }
+};
