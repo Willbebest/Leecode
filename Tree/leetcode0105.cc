@@ -28,3 +28,24 @@ public:
         return buildTree1(preorder, inorder);
     }
 };
+// 减少内存和时间
+class Solution1 {
+public:
+    TreeNode* buildTree(vector<int>& preorder, int pre_st, int pre_end,
+                        vector<int>& inorder, int in_st, int in_end) 
+    {
+        if(pre_st>pre_end||in_st>in_end) return nullptr;
+        TreeNode* root = new TreeNode(preorder[pre_st]);
+        int index = in_st;
+        while(inorder[index]!=root->val) index++;
+        root->left = buildTree(preorder, pre_st+1, pre_st+index-in_st,
+                                inorder, in_st, index-1);
+        root->right = buildTree(preorder, pre_st+index-in_st+1, pre_end,
+                                inorder, index+1, in_end);
+        
+        return root;
+    }
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        return buildTree(preorder, 0, preorder.size()-1, inorder, 0, inorder.size()-1);
+    }
+};
