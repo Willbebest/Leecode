@@ -30,3 +30,22 @@ public:
         return buildTree1(inorder, postorder);
     }
 };
+// 减少内存
+class Solution1 {
+public:
+    TreeNode* buildTree(vector<int>& inorder, int in_st, int in_end, 
+                        vector<int>& postorder, int po_st, int po_end) 
+    {
+        if(in_end<in_st||po_st>po_end) return nullptr;
+        TreeNode* root = new TreeNode(postorder[po_end]);
+        auto iter = find(inorder.begin()+in_st, inorder.begin()+in_end+1, root->val);
+        int left_num = iter - inorder.begin()-in_st;
+        root->left = buildTree(inorder, in_st, in_st+left_num-1, postorder, po_st, po_st+left_num-1);
+        root->right = buildTree(inorder, in_st+left_num+1, in_end, postorder, po_st+left_num, po_end-1);
+        return root;
+
+    }
+    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+        return buildTree(inorder, 0, inorder.size()-1, postorder, 0, postorder.size()-1);
+    }
+};
