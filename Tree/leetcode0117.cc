@@ -35,3 +35,5 @@ public:
         return root;
     }
 };
+
+// 利用已经建立的next指针，待续。。。。
