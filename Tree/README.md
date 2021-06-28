@@ -14,3 +14,5 @@
 | [leetcode0144](https://leetcode-cn.com/problems/binary-tree-preorder-traversal/) | [leetcode0144.cc](./leetcode0144.cc)  |
 | [leetcode0145](https://leetcode-cn.com/problems/binary-tree-postorder-traversal/) | [leetcode0145.cc](./leetcode0145.cc)  |
 | [leetcode0236](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/) | [leetcode0236.cc](./leetcode0236.cc)  |
+| [leetcode0297](https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/) | [leetcode0297.cc](./leetcode0297.cc)  |
+
