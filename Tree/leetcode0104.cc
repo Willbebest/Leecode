@@ -20,3 +20,21 @@ public:
     }
 };
 
+// “自顶向下” 的解决方案
+class Solution {
+public:
+    int result = 0;
+    void maxDepth(TreeNode* root, int depth) {
+        if(root==nullptr) return;
+        if(root->left==nullptr&&root->right==nullptr) {
+            result = max(result, depth);
+        }
+        maxDepth(root->left, depth+1);
+        maxDepth(root->right, depth+1);
+    } 
+
+    int maxDepth(TreeNode* root) {
+        maxDepth(root, 1);
+        return result;
+    }
+};
