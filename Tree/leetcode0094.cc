@@ -14,9 +14,9 @@ class Solution1 {
 public:
     void inorderTraversal(TreeNode*root, vector<int>& result) {
         if(root==nullptr) return;
-        if(root->left) inorderTraversal(root->left, result);   // 左子树
-        result.push_back(root->val);						   // 根节点
-        if(root->right) inorderTraversal(root->right, result); // 右子树
+        inorderTraversal(root->left, result);   // 左子树
+        result.push_back(root->val);		    // 根节点
+        inorderTraversal(root->right, result);  // 右子树
     }  
     vector<int> inorderTraversal(TreeNode* root) {
         vector<int> result;
