@@ -31,3 +31,35 @@ public:
         return hasPathSum(root->left, targetSum - root->val)||hasPathSum(root->right, targetSum - root->val);
     }
 };
+
+
+// 非递归法：利用层次遍历
+class Solution1 {
+public:
+    bool hasPathSum(TreeNode* root, int targetSum) {
+        if(root==nullptr) return false;
+
+        queue<TreeNode*> quuNode;
+        queue<int> quuVal;
+        quuNode.push(root);
+        quuVal.push(targetSum);
+        while(quuNode.size()&&quuVal.size()) {
+            TreeNode* node = quuNode.front(); quuNode.pop();
+            int val = quuVal.front(); quuVal.pop();
+
+            if(node->val==val&&node->left==nullptr&&node->right==nullptr) return true;
+
+            if(node->left) {
+                quuNode.push(node->left);
+                quuVal.push(val - node->val);
+            }
+
+            if(node->right) {
+                quuNode.push(node->right);
+                quuVal.push(val - node->val);
+            }
+        }
+
+        return false;
+    }
+};
