@@ -49,3 +49,25 @@ public:
         return buildTree(preorder, 0, preorder.size()-1, inorder, 0, inorder.size()-1);
     }
 };
+
+class Solution2 {
+public:
+    TreeNode* buildTree(vector<int>& preorder, int pre_start, int pre_end,
+                        vector<int>& inorder, int in_start, int in_end)
+    {
+        if(pre_start>pre_end||in_start>in_end) return nullptr;
+        auto iter = find(inorder.begin(), inorder.end(), preorder[pre_start]);  // 假设没有重复元素
+        int left_len = iter - inorder.begin() - in_start;
+        TreeNode* node = new TreeNode(preorder[pre_start]);
+        node->left = buildTree(preorder, pre_start+1, pre_start+left_len,
+                               inorder, in_start, in_start+left_len-1);
+        node->right = buildTree(preorder, pre_start+left_len+1, pre_end,
+                                inorder, in_start+left_len+1, in_end);
+
+        return node;
+    }
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        return buildTree(preorder, 0, preorder.size()-1,
+                        inorder, 0, inorder.size()-1);
+    }
+};
