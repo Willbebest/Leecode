@@ -22,3 +22,30 @@ public:
         return isSymmetric(root->left, root->right);
     }
 };
+
+// 迭代法
+class Solution1 {
+public:
+    bool isSymmetric(TreeNode* root) {
+        if(root==nullptr) return true;
+        stack<TreeNode*> stk1;
+        stack<TreeNode*> stk2;
+        stk1.push(root->left);
+        stk2.push(root->right);
+
+        while(stk1.size()&&stk2.size()) {
+            TreeNode* node1 = stk1.top(); stk1.pop();
+            TreeNode* node2 = stk2.top(); stk2.pop();
+            if(node1==nullptr&&node2==nullptr) continue;
+            if(node1==nullptr || node2==nullptr || node1->val!=node2->val) return false;
+            //空节点也push要进去
+            stk1.push(node1->right);
+            stk1.push(node1->left);
+
+            stk2.push(node2->left);
+            stk2.push(node2->right);
+        }
+
+        return true;
+    }
+};
