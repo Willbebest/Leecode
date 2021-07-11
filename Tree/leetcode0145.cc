@@ -13,9 +13,9 @@ class Solution1 {
 public:
     void postorderTraversal(TreeNode* root, vector<int>& result) {
         if(root==nullptr) return;
-        if(root->left) postorderTraversal(root->left, result);
-        if(root->right) postorderTraversal(root->right, result);
-        result.push_back(root->val);
+        postorderTraversal(root->left, result);    // 左子树
+        postorderTraversal(root->right, result);   // 右子树
+        result.push_back(root->val);               // 根节点
     }
     vector<int> postorderTraversal(TreeNode* root) {
         vector<int> result;
