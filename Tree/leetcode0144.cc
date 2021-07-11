@@ -16,8 +16,8 @@ public:
     void preorderTraversal(TreeNode* root, vector<int>& result) {
         if(root == nullptr) return;
         result.push_back(root->val);                             // 根节点
-        if(root->left) preorderTraversal(root->left, result);    // 右子树
-        if(root->right) preorderTraversal(root->right, result);  // 左子树
+        preorderTraversal(root->left, result);    // 右子树
+        preorderTraversal(root->right, result);  // 左子树
     }
 
     vector<int> preorderTraversal(TreeNode* root) {
