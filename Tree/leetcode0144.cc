@@ -45,3 +45,24 @@ public:
         return result;
     }
 };
+
+class Solution3 {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> result;
+        if(root==nullptr) return result;
+        stack<TreeNode*> stk;
+        TreeNode* node = root;
+        while(stk.size() || node) {
+            while(node) {
+                result.push_back(node->val);
+                stk.push(node);
+                node = node->left;
+            }
+            node = stk.top(); stk.pop();
+            node = node->right;
+        }
+
+        return result;
+    }
+};
