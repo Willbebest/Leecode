@@ -9,16 +9,14 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+// 递归法
 class Solution {
 public:
-    bool isSymmetric(TreeNode* left_root, TreeNode* right_root) {
-        if(left_root==nullptr&&right_root==nullptr) return true;   // 两棵树都没有节点
-        if(left_root==nullptr|| right_root==nullptr || left_root->val!=right_root->val) return false;  // 至少有一个有节点
-        
-        return isSymmetric(left_root->left, right_root->right)&&
-               isSymmetric(left_root->right,right_root->left);
+    bool isSymmetric(TreeNode* root1, TreeNode* root2) {
+        if(root1==nullptr&&root2==nullptr) return true;
+        if(root1==nullptr || root2==nullptr || root1->val!=root2->val) return false;
+        return isSymmetric(root1->left, root2->right)&&isSymmetric(root1->right, root2->left);
     }
-
     bool isSymmetric(TreeNode* root) {
         if(root==nullptr) return true;
         return isSymmetric(root->left, root->right);
