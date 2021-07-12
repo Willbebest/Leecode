@@ -51,3 +51,24 @@ public:
         return root;
     }
 };
+
+// 非递归：利用父节点已经连接完成
+class Solution3 {
+public:
+    Node* connect(Node* root) {
+        if(root==NULL) return root;
+        Node* start = root;
+        while(start->left) {
+            Node* node = start;
+            while(node) {
+                node->left->next=node->right;
+                if(node->next) {
+                    node->right->next = node->next->left;
+                }
+                node= node->next;
+            }
+            start = start->left;
+        }
+        return root;
+    }
+};
