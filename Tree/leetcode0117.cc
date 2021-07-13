@@ -36,4 +36,38 @@ public:
     }
 };
 
+// 递归法
+class Solution1 {
+public:
+    Node* connect(Node* root) {
+        if(root==nullptr) return root;
+        if(root->left&&root->right) {
+            root->left->next = root->right;
+        }
+        if(root->left!=nullptr&&root->right==nullptr) {
+            root->left->next = getNext(root->next);
+        }
+        if(root->right) {
+            root->right->next = getNext(root->next);
+        }
+        // 一定要注意先递归右子树，因为如果先递归左子树的话，
+        // 左子树一直递归就会出现对于右半边树的某个节点，
+        // 其上一层的root并没有和左半边树的root的next连起来的情况，
+        // 从而导致该层的左半边的节点的next也找不到下一个节点。
+        connect(root->right);
+        connect(root->left);
+        return root;
+    }
+
+    Node* getNext(Node* root) {
+        if(root==nullptr) return root;
+        if(root->left) return root->left;
+        if(root->right) return root->right;
+        if(root->next) return getNext(root->next);
+
+        return nullptr;
+    }
+};
+
+
 // 利用已经建立的next指针，待续。。。。
