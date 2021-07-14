@@ -70,4 +70,32 @@ public:
 };
 
 
-// 利用已经建立的next指针，待续。。。。
+// 利用已经建立的next指针
+class Solution {
+public:
+    void handle(Node* &last, Node* node, Node* &nextStart) { // last,nextStart需要使用引用来修改实参的实际值
+        if(last) last->next = node;
+        if(nextStart==nullptr) nextStart = node;
+        last = node;
+    }
+    Node* connect(Node* root) {
+        if(root==nullptr) return root;
+        Node* start = root;
+        while(start) {
+            Node* last = nullptr, *nextStart = nullptr;
+            Node* node = start;
+            while(node) {
+                if(node->left) {
+                    handle(last, node->left, nextStart);
+                }
+                if(node->right) {
+                    handle(last, node->right, nextStart);
+                }
+                node = node->next;
+            }
+            start = nextStart;
+        }
+
+        return root;
+    }
+};
