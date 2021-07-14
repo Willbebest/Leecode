@@ -26,3 +26,15 @@ public:
         return nullptr;
     }
 };
+// 简洁版
+class Solution1 {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if(root==nullptr) return nullptr;
+        if(root==p||root==q) return root;
+        TreeNode* nodeLeft = lowestCommonAncestor(root->left, p, q);
+        TreeNode* nodeRight = lowestCommonAncestor(root->right, p, q);
+        if(nodeLeft&&nodeRight) return root;
+        return nodeLeft ? nodeLeft : nodeRight;
+    }
+};
